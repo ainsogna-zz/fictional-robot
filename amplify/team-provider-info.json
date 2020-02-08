@@ -1,0 +1,15 @@
+{
+    "sandbox": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-amplify-react-sandbox-214501-authRole",
+            "UnauthRoleArn": "arn:aws:iam::110507021535:role/amplify-amplify-react-sandbox-214501-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::110507021535:role/amplify-amplify-react-sandbox-214501-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "amplify-amplify-react-sandbox-214501-deployment",
+            "UnauthRoleName": "amplify-amplify-react-sandbox-214501-unauthRole",
+            "StackName": "amplify-amplify-react-sandbox-214501",
+            "StackId": "arn:aws:cloudformation:us-west-2:110507021535:stack/amplify-amplify-react-sandbox-214501/56c5eb90-3cda-11ea-80f8-0adc91850d78",
+            "AmplifyAppId": "ddf6xibq2j10y"
+        }
+    }
+}

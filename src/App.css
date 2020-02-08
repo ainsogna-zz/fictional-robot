@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  padding: 20px;
 }
 
 .App-logo {
@@ -15,13 +16,35 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 20vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.App-button {
+  color: #444444;
+    background: #F3F3F3;
+    border: 1px #DADADA solid;
+    padding: 5px 10px;
+    border-radius: 2px;
+    font-weight: bold;
+    font-size: 9pt;
+    outline: none;
+}
+
+.App-button:hover {
+  border: 1px #C6C6C6 solid;
+  box-shadow: 1px 1px 1px #EAEAEA;
+  color: #333333;
+  background: #F7F7F7;
+}
+
+.App-button:active {
+  box-shadow: inset 1px 1px 1px #DFDFDF;
 }
 
 .App-link {
@@ -36,3 +59,5 @@
     transform: rotate(360deg);
   }
 }
+
+@import "./../node_modules/react-toggle-switch/dist/css/switch.min.css"
