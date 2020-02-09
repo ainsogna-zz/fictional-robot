@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  padding: 20px;
+  padding: 10px;
 }
 
 .App-logo {
@@ -23,6 +23,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  border-radius: 15px;
 }
 
 .App-button {
