@@ -1,6 +1,6 @@
 import React from 'react';
-import Slider from 'react-slider-simple';
 import Switch from 'react-toggle-switch';
+import Tabletop from 'tabletop';
 import './App.css';
 
 class App extends React.Component {
@@ -8,7 +8,8 @@ class App extends React.Component {
     super(props);
     this.state = { 
       percent: 50,
-      switched: false
+      switched: false,
+      data: []
     };
 
     // This binding is necessary to make `this` work in the callback
@@ -24,19 +25,23 @@ class App extends React.Component {
   };
 
   handleClick() {
-    fetch("https://5tmuubkncf.execute-api.us-west-2.amazonaws.com/test/pets?foo=17")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          window.alert(result);
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          console.log(error);
-        }
-      )
+    const data = this.state.data;
+    const index = Math.floor(Math.random() * data.length);
+    const row = data[index];
+    const prompt = row.Name + " at " + row.Location + "\n\nReviews:\n" + row.Reviews;
+    window.alert(prompt);
+  }
+
+  componentDidMount() {
+    Tabletop.init({
+      // orig: 14vqSXVmuBh58UCQg7ar_SeHd2zehWLz2mCt8thaWKGw
+      // copy: 1-kaR3hI338g-9v5ona8guM-Q79KVXO3OBEq7xKT_miU
+      key: '14vqSXVmuBh58UCQg7ar_SeHd2zehWLz2mCt8thaWKGw',
+      callback: googleData => {
+        this.setState({ data: googleData });
+      },
+      simpleSheet: true
+    })
   }
 
   onChange = (percent) => {
