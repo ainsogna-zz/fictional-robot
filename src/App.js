@@ -7,11 +7,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      percent: 50,
-      switched: false,
       requireApplePay: false,
       orderAhead: false,
-      data: []
+      matcha: false,
+      data: [],
+      resultName: '',
+      resultLocation: '',
+      resultReviews: ''
     };
 
     // This binding is necessary to make `this` work in the callback
@@ -19,24 +21,16 @@ class App extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  toggleSwitch = () => {
-    this.setState(prevState => {
-      return {
-        switched: !prevState.switched
-      };
-    });
-  };
-
   handleClick() {
     const data = this.state.data;
 
     var results = [];
     for (var row of data) {
-      console.log(row["Apple Pay?"]);
       const b1 = !this.state.requireApplePay || (this.state.requireApplePay && row['Apple Pay?'] === '👍');
       const b2 = !this.state.orderAhead || (this.state.orderAhead && row['Order Ahead?'] === '👍');
+      const b3 = !this.state.matcha || (this.state.matcha && row['Matcha?'] === '👍');
 
-      if (b1 && b2) {
+      if (b1 && b2 && b3) {
         results.push(row);
       }
     }
@@ -45,8 +39,12 @@ class App extends React.Component {
 
     const index = Math.floor(Math.random() * results.length);
     const resultRow = results[index];
-    const prompt = resultRow.Name + " at " + resultRow.Location + "\n\nReviews:\n" + resultRow.Reviews;
-    window.alert(prompt);
+
+    this.setState({ 
+      resultName: resultRow.Name,
+      resultLocation: resultRow.Location,
+      resultReviews: resultRow.Reviews
+    });
   }
 
   componentDidMount() {
@@ -55,19 +53,11 @@ class App extends React.Component {
       // copy: 1-kaR3hI338g-9v5ona8guM-Q79KVXO3OBEq7xKT_miU
       key: '14vqSXVmuBh58UCQg7ar_SeHd2zehWLz2mCt8thaWKGw',
       callback: googleData => {
-        console.log(googleData);
+        // console.log(googleData);
         this.setState({ data: googleData });
       },
       simpleSheet: true
     })
-  }
-
-  onChange = (percent) => {
-    this.setState({ percent });
-  }
-
-  onDone = (percent) => {
-    this.setState({ percent });
   }
 
   handleInputChange(event) {
@@ -78,6 +68,10 @@ class App extends React.Component {
     this.setState({
       [name]: value
     });
+  }
+
+  massage(str) {
+    return str.substring(1, str.length - 1).replace("\n", "<br>");
   }
 
   render() {
@@ -109,9 +103,36 @@ class App extends React.Component {
           </label>
         </div>
 
-        <button className="App-button" onClick={this.handleClick}>
+        <div>
+          <label>
+            Matcha?
+            <input
+              name="matcha"
+              type="checkbox"
+              checked={this.state.matcha}
+              onChange={this.handleInputChange} />
+          </label>
+        </div>
+
+        <button 
+          className="App-button" 
+          disabled={this.state.data.length == 0}
+          onClick={this.handleClick}
+        >
           ☕
         </button>
+
+        <div className="App-result">
+          <div>
+            {this.state.resultName}
+          </div>
+          <div>
+            {this.state.resultLocation}
+          </div>
+          <div>
+            {this.state.resultReviews}
+          </div>
+        </div>
       </div>
     );
   }
