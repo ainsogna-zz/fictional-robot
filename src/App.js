@@ -1,5 +1,4 @@
 import React from 'react';
-// import Switch from 'react-toggle-switch';
 import Tabletop from 'tabletop';
 import './App.css';
 
@@ -35,15 +34,20 @@ class App extends React.Component {
       }
     }
 
-    console.log(results);
-
     const index = Math.floor(Math.random() * results.length);
     const resultRow = results[index];
 
-    this.setState({ 
+    const reviews = resultRow.Reviews.split("\n");
+    const reviewsIndex = Math.floor(Math.random() * reviews.length);
+    var randomReview = "";
+    if (reviews.length > 0) {
+      randomReview = reviews[reviewsIndex];
+    }
+
+    this.setState({
       resultName: resultRow.Name,
       resultLocation: resultRow.Location,
-      resultReviews: resultRow.Reviews
+      resultReviews: randomReview
     });
   }
 
@@ -81,55 +85,57 @@ class App extends React.Component {
           ¯\_(ツ)_/¯
         </header>
       
-        <div>
-          <label>
-            Require Apple Pay?
-            <input
-              name="requireApplePay"
-              type="checkbox"
-              checked={this.state.requireApplePay}
-              onChange={this.handleInputChange} />
-          </label>
-        </div>
+        <div className="App-inputs">
+          <div>
+            <label>
+              Require Apple Pay?
+              <input
+                name="requireApplePay"
+                type="checkbox"
+                checked={this.state.requireApplePay}
+                onChange={this.handleInputChange} />
+            </label>
+          </div>
 
-        <div>
-          <label>
-            Order Ahead?
-            <input
-              name="orderAhead"
-              type="checkbox"
-              checked={this.state.orderAhead}
-              onChange={this.handleInputChange} />
-          </label>
-        </div>
+          <div>
+            <label>
+              Order Ahead?
+              <input
+                name="orderAhead"
+                type="checkbox"
+                checked={this.state.orderAhead}
+                onChange={this.handleInputChange} />
+            </label>
+          </div>
 
-        <div>
-          <label>
-            Matcha?
-            <input
-              name="matcha"
-              type="checkbox"
-              checked={this.state.matcha}
-              onChange={this.handleInputChange} />
-          </label>
-        </div>
+          <div>
+            <label>
+              Matcha?
+              <input
+                name="matcha"
+                type="checkbox"
+                checked={this.state.matcha}
+                onChange={this.handleInputChange} />
+            </label>
+          </div>
 
-        <button 
-          className="App-button" 
-          disabled={this.state.data.length == 0}
-          onClick={this.handleClick}
-        >
-          ☕
-        </button>
+          <button 
+            className="App-button" 
+            disabled={this.state.data.length == 0}
+            onClick={this.handleClick}
+          >
+            ☕
+          </button>
+        </div>
 
         <div className="App-result">
-          <div>
+          <div className="name">
             {this.state.resultName}
           </div>
-          <div>
+          <div className="location">
             {this.state.resultLocation}
           </div>
-          <div>
+          <div className="reviews">
             {this.state.resultReviews}
           </div>
         </div>

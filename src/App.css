@@ -4,21 +4,48 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 20vh;
+  background-color: #393d46;
+  min-height: 15vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  border-radius: 15px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.App-inputs {
+  background-color: rgb(206, 129, 154);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 
 .App-result {
-  background-color: rgb(137, 151, 202);
+  /* background-color: rgb(137, 151, 202); */
+  margin-top: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+}
+
+.App-result .name {
+  background-color: rgb(241, 212, 188);
   padding: 10px;
-  border-radius: 15px;
+}
+
+.App-result .location {
+  background-color: rgb(129, 71, 24);
+  padding: 10px;
+}
+
+.App-result .reviews {
+  background-color: rgb(44, 24, 8);
+  color: white;
+  padding: 10px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
 }
 
 .App-button {
