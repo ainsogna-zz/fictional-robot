@@ -74,8 +74,9 @@ class App extends React.Component {
     });
   }
 
-  massage(str) {
-    return str.substring(1, str.length - 1).replace("\n", "<br>");
+  createMapsDeepLink(address) {
+    const params = 'destination=' + encodeURIComponent(address);
+    return 'https://www.google.com/maps/dir/?api=1&' + params;
   }
 
   render() {
@@ -133,7 +134,9 @@ class App extends React.Component {
             {this.state.resultName}
           </div>
           <div className="location">
-            {this.state.resultLocation}
+            <a href={this.createMapsDeepLink(this.state.resultLocation)} target="_blank">
+              {this.state.resultLocation}
+            </a>
           </div>
           <div className="reviews">
             {this.state.resultReviews}
